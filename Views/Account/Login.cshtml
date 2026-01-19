@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Giriş Yap";
+}
+
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+    <div class="card shadow-lg border-0 rounded-3" style="width: 400px;">
+        <div class="card-header bg-primary text-white text-center">
+            <h4 class="mb-0">🔐 Bütçe Sistemi Giriş</h4>
+        </div>
+        <div class="card-body p-4">
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger text-center">@ViewBag.Error</div>
+            }
+
+            <form asp-action="Login" method="post">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Kullanıcı Adı</label>
+                    <input type="text" class="form-control" id="username" name="username" required autofocus />
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Şifre</label>
+                    <input type="password" class="form-control" id="password" name="password" required />
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
+            </form>
+        </div>
+        <div class="card-footer text-muted text-center">
+            <small>Admin için: <b>admin / 123</b></small>
+        </div>
+    </div>
+</div>

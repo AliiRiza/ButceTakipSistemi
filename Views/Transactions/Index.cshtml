@@ -1,0 +1,149 @@
+﻿@model IEnumerable<ButceTakipSistemi.Models.Transaction>
+
+@{
+    ViewData["Title"] = "Genel Durum";
+}
+
+<div class="container-fluid p-0">
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card bg-primary text-white shadow-lg border-0 rounded-4 text-center p-4">
+                <h5 class="opacity-75">💰 Toplam Varlığım</h5>
+                <h1 class="display-4 fw-bold">
+                    @ViewBag.TotalBalance.ToString("C2")
+                </h1>
+                <small>Tüm gelir ve giderlerinizin net sonucu</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-4 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white fw-bold text-center">📅 Bugün</div>
+                <div class="card-body text-center">
+                    <div class="text-success mb-2">
+                        <i class="bi bi-arrow-down-circle"></i> Gelir: <b>@ViewBag.IncomeToday.ToString("C2")</b>
+                    </div>
+                    <div class="text-danger">
+                        <i class="bi bi-arrow-up-circle"></i> Gider: <b>@ViewBag.ExpenseToday.ToString("C2")</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white fw-bold text-center">🗓️ Bu Hafta</div>
+                <div class="card-body text-center">
+                    <div class="text-success mb-2">
+                        <i class="bi bi-arrow-down-circle"></i> Gelir: <b>@ViewBag.IncomeWeek.ToString("C2")</b>
+                    </div>
+                    <div class="text-danger">
+                        <i class="bi bi-arrow-up-circle"></i> Gider: <b>@ViewBag.ExpenseWeek.ToString("C2")</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white fw-bold text-center">📆 Bu Ay</div>
+                <div class="card-body text-center">
+                    <div class="text-success mb-2">
+                        <i class="bi bi-arrow-down-circle"></i> Gelir: <b>@ViewBag.IncomeMonth.ToString("C2")</b>
+                    </div>
+                    <div class="text-danger">
+                        <i class="bi bi-arrow-up-circle"></i> Gider: <b>@ViewBag.ExpenseMonth.ToString("C2")</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm border-0">
+                <div class="card-body bg-light rounded-3">
+                    <form asp-action="Index" method="get" class="row g-3 align-items-end">
+
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold text-muted small">Kelime Ara</label>
+                            <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="form-control" placeholder="Market, Fatura vb..." />
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold text-muted small">Başlangıç</label>
+                            <input type="date" name="startDate" value="@ViewData["StartDate"]" class="form-control" />
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold text-muted small">Bitiş</label>
+                            <input type="date" name="endDate" value="@ViewData["EndDate"]" class="form-control" />
+                        </div>
+
+                        <div class="col-md-2 d-flex gap-2">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="bi bi-search"></i> Bul
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary" title="Filtreyi Temizle">
+                                <i class="bi bi-x-lg"></i>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="fw-bold">Son İşlemler</h3>
+        <a asp-action="Create" class="btn btn-success rounded-pill px-4 shadow-sm">
+            <i class="bi bi-plus-lg"></i> Yeni Ekle
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <table class="table table-hover table-striped mb-0">
+                <thead class="bg-light text-secondary">
+                    <tr>
+                        <th class="ps-4">Kategori</th>
+                        <th>Açıklama</th>
+                        <th>Tarih</th>
+                        <th>Tutar</th>
+                        <th class="text-center">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="ps-4 align-middle">
+                                <span class="badge bg-secondary rounded-pill fw-normal px-3">@item.Category.Name</span>
+                            </td>
+                            <td class="align-middle fw-bold text-dark">
+                                @item.Description
+                            </td>
+                            <td class="align-middle text-muted small">
+                                @item.Date.ToString("dd MMM yyyy")
+                            </td>
+                            <td class="align-middle fw-bold @(item.Category.Type == 1 ? "text-success" : "text-danger")">
+                                @(item.Category.Type == 0 ? "-" : "+")@item.Amount.ToString("N2") ₺
+                            </td>
+                            <td class="text-center align-middle">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-light text-primary border-0">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-light text-danger border-0">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
