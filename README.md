@@ -1,8 +1,8 @@
-# 💸 Bütçe Takip Sistemi (Budget Tracker)
+#  Bütçe Takip Sistemi (Budget Tracker)
 
 Bu proje, kişisel gelir ve giderlerinizi takip etmenizi sağlayan, anlık bakiye hesaplaması yapan ve harcamaları kategorize eden bir web uygulamasıdır. Kullanıcı dostu arayüzü sayesinde finansal durumunuzu kolayca analiz edebilirsiniz.
 
-## 🚀 Özellikler
+##  Özellikler
 
 - **🔐 Güvenli Giriş:** Kullanıcı kimlik doğrulama sistemi.
 - **📊 Dashboard (Genel Bakış):** Anlık toplam bakiye, günlük/haftalık/aylık gelir-gider özeti.
@@ -11,7 +11,7 @@ Bu proje, kişisel gelir ve giderlerinizi takip etmenizi sağlayan, anlık bakiy
 - **🔍 Filtreleme:** Tarih aralığına, kategoriye veya kelimeye göre detaylı arama.
 - **📈 İstatistikler:** Harcama alışkanlıklarını analiz eden dinamik hesaplamalar.
 
-## 📷 Ekran Görüntüleri
+##  Ekran Görüntüleri
 
 Projenin çalışan halinden görünümler:
 
@@ -37,14 +37,14 @@ Gelir ve gider türlerinizi özelleştirin.
 
 ---
 
-## 🛠️ Kullanılan Teknolojiler
+##  Kullanılan Teknolojiler
 
 - **Backend:** ASP.NET Core 8.0 MVC
 - **Veritabanı:** Entity Framework Core (Code First) & SQL Server
 - **Frontend:** HTML5, CSS3, Bootstrap 5
 - **IDE:** Visual Studio 2022
 
-## 📦 Kurulum ve Çalıştırma
+##  Kurulum ve Çalıştırma
 
 1. Projeyi bilgisayarınıza indirin (Clone veya Download Zip).
 2. `appsettings.json` dosyasındaki veritabanı bağlantı yolunu (Connection String) kendi sunucunuza göre ayarlayın.
